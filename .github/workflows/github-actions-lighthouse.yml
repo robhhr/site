@@ -1,2 +1,23 @@
-- name: Lighthouse CI Action
-  uses: treosh/lighthouse-ci-action@12.6.1
+name: Lighthouse CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@12.6.1
+        with:
+          urls: 'https://robhhr.com'
