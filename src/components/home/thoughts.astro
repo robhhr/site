@@ -1,0 +1,20 @@
+---
+import type {Thought} from '../../types/thought.types'
+import LayoutContent from '../../layouts/home/content.astro'
+
+const {thoughts} = Astro.props
+---
+
+<LayoutContent title="thoughts">
+  {
+    thoughts.length > 0 && (
+      <ul class="grid gap-4">
+        {thoughts.map((thought: Thought) => (
+          <li class="rounded-md border p-4">
+            <h3 class="font-bold">{thought.content}</h3>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</LayoutContent>

@@ -1,13 +1,20 @@
 ---
-import BaseLayout from '../layouts/base.astro'
-import Projects from '../components/home/projects.astro'
 import {tryCatch} from '../utils/try-catch'
 import {getProjects} from '../db/models/projects'
+import {getThoughts} from '../db/models/thoughts'
+import BaseLayout from '../layouts/base.astro'
+import Projects from '../components/home/projects.astro'
+import Thoughts from '../components/home/thoughts.astro'
 
 const projectData = await tryCatch(getProjects({limit: 3}))
+const thoughtData = await tryCatch(getThoughts({limit: 3}))
 
 if (projectData.error) {
   console.error(projectData.error)
+}
+
+if (thoughtData.error) {
+  console.error(thoughtData.error)
 }
 ---
 
@@ -16,5 +23,6 @@ if (projectData.error) {
     <h1>title here</h1>
 
     {projectData.data && <Projects projects={projectData.data} />}
+    {thoughtData.data && <Thoughts thoughts={thoughtData.data} />}
   </div>
 </BaseLayout>
