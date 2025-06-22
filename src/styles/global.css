@@ -5,10 +5,28 @@
 @theme {
   --color-primary-light: #ebdbb2;
   --color-primary-dark: #1d2021;
+
+  --color-red-light: #fb4934;
+  --color-red-dark: #cc241d;
+
+  --color-blue-light: #458588;
+  --color-blue-dark: #83a598;
 }
 
 @layer base {
   html {
     @apply dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark h-full transition-colors duration-100 ease-in-out;
+  }
+
+  h1 {
+    @apply text-xl;
+  }
+
+  h2 {
+    @apply text-lg leading-none;
+  }
+
+  a {
+    @apply text-blue-light dark:text-blue-dark text-xs underline;
   }
 }
