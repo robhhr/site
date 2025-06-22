@@ -1,0 +1,9 @@
+---
+const {title} = Astro.props
+---
+
+<div>
+  {title && <h2 class="mb-4">recent {title}</h2>}
+  <slot />
+  <span class="mt-10 inline-block w-20 border-4"></span>
+</div>
