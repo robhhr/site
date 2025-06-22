@@ -1,0 +1,20 @@
+---
+import type {Note} from '../../types/note.types'
+import LayoutContent from '../../layouts/home/content.astro'
+
+const {notes} = Astro.props
+---
+
+<LayoutContent title="notes">
+  {
+    notes.length > 0 && (
+      <ul class="grid gap-4">
+        {notes.map((note: Note) => (
+          <li class="rounded-md border p-4">
+            <p class="font-bold">{note.title}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</LayoutContent>
