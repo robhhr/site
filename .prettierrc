@@ -13,22 +13,6 @@
   "trailingComma": "all",
   "useTabs": false,
   "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
-  "importOrder": [
-    "^react",
-    "^react-router",
-    "^framer-motion",
-    "^clsx",
-    "^tailwind-merge",
-    "<THIRD_PARTY_MODULES>",
-    "^@/models/(.*)$",
-    "^@/components/(.*)$",
-    "^@/utils/(.*)$",
-    "^./hooks/(.*)$",
-    "^./(.*)$",
-    "^./assets/(.*)$"
-  ],
-  "importOrderSeparation": false,
-  "importOrderSortSpecifiers": true,
   "overrides": [
     {
       "files": "*.astro",
