@@ -9,20 +9,22 @@ import Thoughts from '../components/home/thoughts.astro'
 import Notes from '../components/home/notes.astro'
 import Logo from '../assets/logo-alt.svg?raw'
 
-const noteData = await tryCatch(getNotes({limit: 3}))
-const projectData = await tryCatch(getProjects({limit: 3}))
-const thoughtData = await tryCatch(getThoughts({limit: 3}))
+const [noteData, projectData, thoughtData] = await Promise.all([
+  tryCatch(getNotes({limit: 3})),
+  tryCatch(getProjects({limit: 3})),
+  tryCatch(getThoughts({limit: 3})),
+])
 
-if (projectData.error) {
-  console.error(projectData.error)
+const entries = {
+  notes: noteData,
+  project: projectData,
+  thought: thoughtData,
 }
 
-if (thoughtData.error) {
-  console.error(thoughtData.error)
-}
-
-if (noteData.error) {
-  console.error(noteData.error)
+for (const [key, value] of Object.entries(entries)) {
+  if (value.error) {
+    console.log(`${key} error:`, value.error)
+  }
 }
 ---
 
@@ -32,8 +34,8 @@ if (noteData.error) {
 
     <h1>title here</h1>
 
-    {projectData.data && <Projects projects={projectData.data} />}
-    {thoughtData.data && <Thoughts thoughts={thoughtData.data} />}
-    {noteData.data && <Notes notes={noteData.data} />}
+    <Projects projects={projectData.data ?? []} />
+    <Thoughts thoughts={thoughtData.data ?? []} />
+    <Notes notes={noteData.data ?? []} />
   </div>
 </BaseLayout>
