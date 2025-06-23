@@ -6,15 +6,13 @@ const {thoughts} = Astro.props
 ---
 
 <LayoutContent title="thoughts">
-  {
-    thoughts.length > 0 && (
-      <ul class="grid gap-4">
-        {thoughts.map((thought: Thought) => (
-          <li class="rounded-md border p-4">
-            <h3 class="font-bold">{thought.content}</h3>
-          </li>
-        ))}
-      </ul>
-    )
-  }
+  <ul class="grid gap-4">
+    {
+      thoughts.map((thought: Thought) => (
+        <li class="rounded-md border p-4">
+          <h3 class="font-bold">{thought.content}</h3>
+        </li>
+      ))
+    }
+  </ul>
 </LayoutContent>
