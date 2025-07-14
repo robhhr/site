@@ -32,7 +32,9 @@ for (const [key, value] of Object.entries(entries)) {
   <div class="flex flex-col gap-4 p-4">
     <div set:html={Logo} class="h-20 w-20" />
 
-    <h1 class="mt-4 mb-10">title here</h1>
+    <h1 class="mt-4">name</h1>
+
+    <p class="mb-6">description</p>
 
     {projectData.data?.length > 0 && <Projects projects={projectData.data} />}
     {thoughtData.data?.length > 0 && <Thoughts thoughts={thoughtData.data} />}
