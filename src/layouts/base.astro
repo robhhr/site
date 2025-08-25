@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import ButtonTheme from '../components/button-theme.astro'
 import Header from '../components/header.astro'
 ---
 
@@ -24,14 +25,39 @@ import Header from '../components/header.astro'
         }
       })()
     </script>
+    <script
+      is:inline
+      src="https://umami.robhhr.com/script.js"
+      data-website-id="85598c75-55b3-475b-ab20-dd1eb20e8ab0"></script>
+
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>robhhr</title>
   </head>
-  <body class="mx-auto flex h-full max-w-3xl flex-col px-20 py-10">
-    <Header />
+  <body class="flex h-full max-w-3xl flex-col p-4">
     <slot />
   </body>
+
+  <footer class="relative mt-auto p-4 text-sm">
+    <ButtonTheme />
+    <a
+      href="https://github.com/robhhr"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mr-0.5"
+    >
+      github
+    </a>
+    •
+    <a
+      href="https://github.com/robhhr/site"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="ml-1"
+    >
+      source
+    </a>
+  </footer>
 </html>
