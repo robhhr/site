@@ -4,8 +4,8 @@ import {getNotes} from '../db/models/notes'
 import {getProjects} from '../db/models/projects'
 import {getThoughts} from '../db/models/thoughts'
 import BaseLayout from '../layouts/base.astro'
-import Logo from '../assets/logo-alt.svg?raw'
 import List from '../components/list.astro'
+import ThoughtList from '../components/thought/thought-list.astro'
 
 const [noteData, projectData, thoughtData] = await Promise.all([
   tryCatch(getNotes({limit: 3})),
@@ -28,13 +28,18 @@ for (const [key, value] of Object.entries(entries)) {
 
 <BaseLayout>
   <div class="flex flex-col gap-4 p-4">
-    <div set:html={Logo} class="h-20 w-20" />
-
-    <h1 class="mt-4">name</h1>
-
-    <p class="mb-6">description</p>
+    <div class="flex flex-col">
+      <h1>Roberto</h1>
+      <p class="mt-4 mb-2">
+        web developer with a keen interest in privacy, security & performance
+      </p>
+      <p class="mb-6">based in vancouver</p>
+    </div>
 
     {projectData.data?.length > 0 && <List items={projectData.data} />}
+
+    {thoughtData.data?.length > 0 && <ThoughtList items={thoughtData.data} />}
+
     {noteData.data?.length > 0 && <List items={noteData.data} />}
   </div>
 </BaseLayout>
