@@ -1,4 +1,4 @@
-export type Thought = {
+export type ThoughtType = {
   id: number
   content: string
 }
