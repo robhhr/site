@@ -2,12 +2,14 @@
 const {items} = Astro.props
 import type {ListItemType} from '../types/list.types.ts'
 import ListItem from '../components/list-item.astro'
+
+console.log(items)
 ---
 
 <ul>
   {
     items.map((item: ListItemType) => (
-      <ListItem title={item.title} to={`/${item.slug}`} />
+      <ListItem title={item.title} to={`/${item.slug ?? ''}`} />
     ))
   }
 </ul>

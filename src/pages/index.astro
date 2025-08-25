@@ -4,10 +4,8 @@ import {getNotes} from '../db/models/notes'
 import {getProjects} from '../db/models/projects'
 import {getThoughts} from '../db/models/thoughts'
 import BaseLayout from '../layouts/base.astro'
-import Projects from '../components/home/projects.astro'
-import Thoughts from '../components/home/thoughts.astro'
-import Notes from '../components/home/notes.astro'
 import Logo from '../assets/logo-alt.svg?raw'
+import List from '../components/list.astro'
 
 const [noteData, projectData, thoughtData] = await Promise.all([
   tryCatch(getNotes({limit: 3})),
@@ -36,8 +34,7 @@ for (const [key, value] of Object.entries(entries)) {
 
     <p class="mb-6">description</p>
 
-    {projectData.data?.length > 0 && <Projects projects={projectData.data} />}
-    {thoughtData.data?.length > 0 && <Thoughts thoughts={thoughtData.data} />}
-    {noteData.data?.length > 0 && <Notes notes={noteData.data ?? []} />}
+    {projectData.data?.length > 0 && <List items={projectData.data} />}
+    {noteData.data?.length > 0 && <List items={noteData.data} />}
   </div>
 </BaseLayout>
