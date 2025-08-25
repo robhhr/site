@@ -1,3 +1,9 @@
+---
+const {items} = Astro.props
+import Thought from './thought.astro'
+import type {ThoughtType} from '../../types/thought.types'
+---
+
 <ul>
-  <slot />
+  {items.map((item: ThoughtType) => <Thought thought={item} />)}
 </ul>
