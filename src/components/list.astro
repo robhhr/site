@@ -1,0 +1,8 @@
+---
+const {items} = Astro.props
+import ListItem from '../components/list-item.astro'
+---
+
+<ul>
+  {items.map(item => <ListItem title={item.title} to={`/${item.slug}`} />)}
+</ul>
