@@ -1,24 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-primary-light: #ebdbb2;
-  --color-primary-dark: #1d2021;
+  --color-primary-dark: #161616;
 
   --color-red-light: #fb4934;
   --color-red-dark: #cc241d;
 
-  --color-blue-light: #458588;
-  --color-blue-dark: #83a598;
+  --color-link-light: #458588;
+  --color-link-dark: #83a598;
 
-  --font-primary: "Gelasio", serif;
+  --font-primary: "IBM Plex Sans Thai Looped", sans-serif;
 }
 
 @layer base {
   html {
     @apply dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark h-full transition-colors duration-100 ease-in-out font-primary;
+      font-weight: 500;
   }
 
   h1 {
@@ -30,6 +31,14 @@
   }
 
   a {
-    @apply text-blue-light dark:text-blue-dark text-xs underline;
+    @apply text-link-light dark:text-link-dark relative;
+  }
+
+  a[target="_blank"]::after {
+    @apply w-4 h-4 inline-block align-middle -ml-1.5;
+    content: '';
+    background-color: currentColor;
+    mask: url('/icon-external-link.svg') no-repeat center;
+    mask-size: contain;
   }
 }
