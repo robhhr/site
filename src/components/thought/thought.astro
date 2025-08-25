@@ -1,7 +1,7 @@
 ---
-const {content} = Astro.props
+const {thought} = Astro.props
 ---
 
 <article class="prose prose-slate dark:prose-invert max-w-none">
-  <div set:html={content} />
+  <div set:html={thought.content} />
 </article>
