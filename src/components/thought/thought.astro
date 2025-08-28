@@ -1,6 +1,7 @@
 ---
 import type {ThoughtType} from '../../types/thought.types'
 import {getDate} from '../../utils/get-date'
+import MarkdownRenderer from '../markdown-renderer'
 import ButtonHeart from '../button-heart.astro'
 
 const {thought} = Astro.props
@@ -11,7 +12,7 @@ console.log('thought:', thought)
 <article
   class="prose prose-slate dark:prose-invert shadow-primary-dark dark:shadow-primary flex max-w-none flex-col rounded-xl p-4"
 >
-  <div set:html={thought.content} />
+  <MarkdownRenderer content={thought.content} />
   <div class="mt-2 ml-auto flex items-center">
     <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
       {getDate(thought.created_at)}
