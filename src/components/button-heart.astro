@@ -6,7 +6,7 @@ type Props = {
 }
 ---
 
-<div class="flex items-center gap-1">
+<div class="flex items-center gap-0.5">
   <button
     class="dark:text-red-dark text-red-light cursor-pointer transition-transform hover:scale-105"
     type="button"
@@ -63,44 +63,53 @@ type Props = {
       if (hasLiked) {
         unfilledHeart.style.display = 'none'
         filledHeart.style.display = 'block'
-        button.disabled = true
-        button.setAttribute('aria-label', 'already liked')
-        return
+        button.setAttribute('aria-label', 'unlike post')
       }
 
       button.addEventListener('click', async e => {
         e.preventDefault()
 
-        if (sessionStorage.getItem(`liked-${thoughtId}`)) return
-
+        const isLiked = sessionStorage.getItem(`liked-${thoughtId}`)
         button.disabled = true
 
         try {
-          const response = await fetch(`/api/thoughts/${thoughtId}/like`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+          const endpoint = isLiked ? 'unlike' : 'like'
+          const response = await fetch(
+            `/api/thoughts/${thoughtId}/${endpoint}`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
             },
-          })
+          )
 
           if (response.ok) {
             const data = await response.json()
             favoritesSpan.textContent = data.favorites
-            unfilledHeart.style.display = 'none'
-            filledHeart.style.display = 'block'
-            sessionStorage.setItem(`liked-${thoughtId}`, 'true')
-            button.setAttribute('aria-label', 'liked')
-            button.style.transform = 'scale(1.2)'
 
+            if (isLiked) {
+              unfilledHeart.style.display = 'block'
+              filledHeart.style.display = 'none'
+              sessionStorage.removeItem(`liked-${thoughtId}`)
+              button.setAttribute('aria-label', 'like post')
+            } else {
+              unfilledHeart.style.display = 'none'
+              filledHeart.style.display = 'block'
+              sessionStorage.setItem(`liked-${thoughtId}`, 'true')
+              button.setAttribute('aria-label', 'unlike post')
+            }
+
+            button.style.transform = 'scale(1.2)'
             setTimeout(() => {
               button.style.transform = ''
             }, 150)
           } else {
-            console.error('failed to like post')
-            button.disabled = false
+            console.error(`failed to ${endpoint} post`)
           }
         } catch (error) {
-          console.error('error liking post:', error)
+          console.error(`error ${isLiked ? 'unliking' : 'liking'} post:`, error)
+        } finally {
           button.disabled = false
         }
       })

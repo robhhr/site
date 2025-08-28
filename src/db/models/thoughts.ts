@@ -39,3 +39,20 @@ export async function incrementFavorites(thoughtId: string) {
 
   return result.data.rows[0]?.favorites
 }
+
+export async function decrementFavorites(thoughtId: string) {
+  const sql = `
+    UPDATE thoughts
+    SET favorites = GREATEST(favorites - 1, 0), updated_at = now()
+    WHERE id = $1
+    RETURNING favorites
+  `
+  const result = await tryCatch(query(sql, [thoughtId]))
+
+  if (result.error) {
+    console.error(result.error)
+    return null
+  }
+
+  return result.data.rows[0]?.favorites
+}
