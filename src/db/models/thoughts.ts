@@ -22,3 +22,20 @@ export async function getThoughts({limit}: {limit?: number} = {}) {
 
   return result.data.rows
 }
+
+export async function incrementFavorites(thoughtId: string) {
+  const sql = `
+    UPDATE thoughts
+    SET favorites = favorites + 1, updated_at = now()
+    WHERE id = $1
+    RETURNING favorites
+  `
+  const result = await tryCatch(query(sql, [thoughtId]))
+
+  if (result.error) {
+    console.error(result.error)
+    return null
+  }
+
+  return result.data.rows[0]?.favorites
+}
