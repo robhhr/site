@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary-light: #ebdbb2;
+  --color-primary-light: #d5c4a1;
   --color-primary-dark: #161616;
 
   --color-red-light: #fb4934;
@@ -13,13 +13,13 @@
   --color-link-light: #458588;
   --color-link-dark: #83a598;
 
-  --font-primary: "IBM Plex Sans Thai Looped", sans-serif;
+  --font-primary: 'IBM Plex Sans Thai Looped', sans-serif;
 }
 
 @layer base {
   html {
-    @apply dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark h-full transition-colors duration-100 ease-in-out font-primary;
-      font-weight: 500;
+    @apply dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark font-primary h-full transition-colors duration-100 ease-in-out;
+    font-weight: 500;
   }
 
   h1 {
@@ -31,14 +31,26 @@
   }
 
   a {
-    @apply text-link-light dark:text-link-dark relative;
+    @apply text-link-light dark:text-link-dark relative inline-block;
   }
 
-  a[target="_blank"]::after {
-    @apply w-4 h-4 inline-block align-middle -ml-1.5;
+  a[target='_blank']::before {
+    @apply -mr-1 inline-block h-4 w-4 align-middle;
     content: '';
     background-color: currentColor;
     mask: url('/icon-external-link.svg') no-repeat center;
     mask-size: contain;
+  }
+
+  a:after {
+    @apply border-link-light dark:border-link-dark border-1;
+    display: block;
+    content: '';
+    transform: scaleX(0);
+    transition: transform 100ms ease-in-out;
+  }
+
+  a:hover:after {
+    transform: scaleX(1);
   }
 }
