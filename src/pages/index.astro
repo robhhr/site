@@ -27,9 +27,29 @@ for (const [key, value] of Object.entries(entries)) {
 ---
 
 <BaseLayout>
-  <div class="flex flex-col gap-4 p-4">
-    <div class="flex flex-col">
-      <p class="mt-4 mb-2">coming soon</p>
+  <div class="mb-20 p-4">
+    <div class="mb-12 flex flex-col">
+      <h1>robhhr</h1>
+      <p class="mt-4 mb-2">
+        web developer with a keen interest in privacy, security & performance
+      </p>
+      <p>based in vancouver</p>
+    </div>
+
+    <div class="flex flex-col gap-12">
+      {
+        projectData.data?.length > 0 && (
+          <List items={projectData.data} title="projects" />
+        )
+      }
+
+      {
+        thoughtData.data?.length > 0 && (
+          <ThoughtList items={thoughtData.data} title="thoughts" />
+        )
+      }
+
+      {noteData.data?.length > 0 && <List items={noteData.data} title="log" />}
     </div>
   </div>
 </BaseLayout>

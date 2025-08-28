@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css'
 import ButtonTheme from '../components/button-theme.astro'
-import Header from '../components/header.astro'
 ---
 
 <html lang="en">
@@ -36,7 +35,7 @@ import Header from '../components/header.astro'
     <meta name="generator" content={Astro.generator} />
     <title>robhhr</title>
   </head>
-  <body class="flex h-full max-w-3xl flex-col p-4">
+  <body class="flex h-full max-w-3xl flex-col p-4 mx-auto">
     <slot />
   </body>
 
@@ -48,6 +47,14 @@ import Header from '../components/header.astro'
       rel="noopener noreferrer"
     >
       github
+    </a>
+    •
+    <a
+      href="https://github.com/robhhr/site"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      source
     </a>
   </footer>
 </html>
