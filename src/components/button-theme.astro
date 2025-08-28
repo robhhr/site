@@ -1,6 +1,9 @@
 <button
   id="js-theme-toggle"
   class="group absolute -top-8 left-4 cursor-pointer rounded-full"
+  type="button"
+  aria-label="toggle theme"
+  role="button"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +11,7 @@
     height="32"
     fill="currentColor"
     viewBox="0 0 256 256"
+    aria-hidden="true"
   >
     <path
       id="melted-face"
@@ -48,6 +52,10 @@
     html.classList.toggle('dark', theme === 'dark')
     localStorage.setItem('theme', theme)
     updateFaceIcon(theme)
+    toggleBtn.setAttribute(
+      'aria-label',
+      `switch to ${theme === 'dark' ? 'light' : 'dark'} theme`,
+    )
   }
 
   applyTheme(currentTheme)
@@ -55,5 +63,13 @@
   toggleBtn?.addEventListener('click', () => {
     const isDark = html.classList.contains('dark')
     applyTheme(isDark ? 'light' : 'dark')
+  })
+
+  toggleBtn?.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      const isDark = html.classList.contains('dark')
+      applyTheme(isDark ? 'light' : 'dark')
+    }
   })
 </script>
