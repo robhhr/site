@@ -15,8 +15,10 @@
 
   --font-primary: 'IBM Plex Sans Thai Looped', sans-serif;
 
-  --shadow-primary: rgba(213, 196, 161, 0.05) 0px 1px 0px, rgba(213, 196, 161, 0.1) 0px 0px 8px;
-  --shadow-primary-dark: rgba(22, 22, 22, 0.05) 0px 1px 0px, rgba(22, 22, 22, 0.1) 0px 0px 8px;
+  --shadow-primary:
+    rgba(213, 196, 161, 0.05) 0px 1px 0px, rgba(213, 196, 161, 0.1) 0px 0px 8px;
+  --shadow-primary-dark:
+    rgba(22, 22, 22, 0.05) 0px 1px 0px, rgba(22, 22, 22, 0.1) 0px 0px 8px;
 }
 
 @layer base {
@@ -55,5 +57,9 @@
 
   a:hover:after {
     transform: scaleX(1);
+  }
+
+  .prose {
+    @apply gap-2.5;
   }
 }
