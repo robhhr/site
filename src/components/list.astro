@@ -1,13 +1,16 @@
 ---
-const {items} = Astro.props
+const {items, title} = Astro.props
 import type {ListItemType} from '../types/list.types.ts'
 import ListItem from '../components/list-item.astro'
 ---
 
-<ul>
-  {
-    items.map((item: ListItemType) => (
-      <ListItem title={item.title} to={`/${item.slug ?? ''}`} />
-    ))
-  }
-</ul>
+<div>
+  {title && <h2 class="mb-5">{title}</h2>}
+  <ul>
+    {
+      items.map((item: ListItemType) => (
+        <ListItem title={item.title} to={`/${item.slug ?? ''}`} />
+      ))
+    }
+  </ul>
+</div>
