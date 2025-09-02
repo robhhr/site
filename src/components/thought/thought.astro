@@ -10,14 +10,34 @@ console.log('thought:', thought)
 ---
 
 <article
-  class="shadow-primary-dark dark:shadow-primary flex max-w-none flex-col rounded-xl p-4"
+  class="dark:border-primary-light/50 border-primary-dark/50 flex max-w-none flex-col border-b py-4"
 >
   <MarkdownRenderer content={thought.content} />
-  <div class="mt-2 ml-auto flex items-center">
-    <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
-      {getDate(thought.created_at)}
-    </p>
-    <span class="mx-1"> • </span>
-    <ButtonHeart thoughtId={String(thought.id)} favorites={thought.favorites} />
+  <div class="mt-2 flex justify-between items-center">
+    {
+      thought.tags && thought.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {thought.tags.map(tag => (
+            <span
+              class="dark:text-primary-light text-primary-dark text-xs"
+              aria-label={`tag: ${tag}`}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="flex items-center ml-auto">
+      <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
+        {getDate(thought.created_at)}
+      </p>
+      <span class="mx-1"> • </span>
+      <ButtonHeart
+        thoughtId={String(thought.id)}
+        favorites={thought.favorites}
+      />
+    </div>
   </div>
 </article>
