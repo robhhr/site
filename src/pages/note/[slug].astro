@@ -1,0 +1,21 @@
+---
+import {getNoteBySlug} from '../../db/models/notes'
+import MarkdownRenderer from '../../components/markdown-renderer'
+import BaseLayout from '../../layouts/base.astro'
+const slug = Astro.params.slug
+const note = await getNoteBySlug(slug)
+
+if (!note) {
+  throw new Error(`note ${slug} not found`)
+}
+
+console.log('note:', note)
+---
+
+<BaseLayout>
+  <h1 class="mb-10">{note.title}</h1>
+
+  <div class="mb-32">
+    <MarkdownRenderer content={note.content} />
+  </div>
+</BaseLayout>
