@@ -2,20 +2,31 @@
 import {getNoteBySlug} from '../../db/models/notes'
 import MarkdownRenderer from '../../components/markdown-renderer'
 import BaseLayout from '../../layouts/base.astro'
+import {getDate} from '../../utils/get-date'
+import ButtonHeart from '../../components/button-heart.astro'
+import TagList from '../../components/tag-list.astro'
 const slug = Astro.params.slug
 const note = await getNoteBySlug(slug)
 
 if (!note) {
   throw new Error(`note ${slug} not found`)
 }
-
-console.log('note:', note)
 ---
 
 <BaseLayout>
-  <h1 class="mb-10">{note.title}</h1>
+  <h1>{note.title}</h1>
+  <div class="mt-2 mb-10 flex flex-col gap-2">
+    <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
+      {getDate(note.created_at)}
+    </p>
+    <TagList tags={note.tags} />
+  </div>
 
   <div class="mb-32">
     <MarkdownRenderer content={note.content} />
+
+    <div class="mt-10 flex items-center justify-between">
+      <ButtonHeart thoughtId={String(note.id)} favorites={note.favorites} />
+    </div>
   </div>
 </BaseLayout>

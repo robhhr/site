@@ -4,6 +4,7 @@ import {getDate} from '../../utils/get-date'
 import MarkdownRenderer from '../markdown-renderer'
 import ButtonHeart from '../button-heart.astro'
 import Pinned from '../pinned.astro'
+import TagList from '../tag-list.astro'
 
 const {thought} = Astro.props
 type Props = {thought: ThoughtType}
@@ -15,20 +16,7 @@ type Props = {thought: ThoughtType}
   {thought.is_pinned && <Pinned />}
   <MarkdownRenderer content={thought.content} />
   <div class="mt-2 flex items-center justify-between">
-    {
-      thought.tags && thought.tags.length > 0 && (
-        <div class="flex flex-wrap gap-2">
-          {thought.tags.map(tag => (
-            <span
-              class="dark:text-primary-light text-primary-dark text-xs font-bold"
-              aria-label={`tag: ${tag}`}
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )
-    }
+    <TagList tags={thought.tags} />
 
     <div class="ml-auto flex items-center">
       <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
