@@ -42,3 +42,37 @@ export async function getNoteBySlug(slug: string) {
 
   return result.data.rows[0]
 }
+
+export async function incrementFavorites(noteId: string) {
+  const sql = `
+    UPDATE notes
+    SET favorites = favorites + 1, updated_at = now()
+    WHERE id = $1
+    RETURNING favorites
+  `
+  const result = await tryCatch(query(sql, [noteId]))
+
+  if (result.error) {
+    console.error(result.error)
+    return null
+  }
+
+  return result.data.rows[0]?.favorites
+}
+
+export async function decrementFavorites(noteId: string) {
+  const sql = `
+    UPDATE notes
+    SET favorites = GREATEST(favorites - 1, 0), updated_at = now()
+    WHERE id = $1
+    RETURNING favorites
+  `
+  const result = await tryCatch(query(sql, [noteId]))
+
+  if (result.error) {
+    console.error(result.error)
+    return null
+  }
+
+  return result.data.rows[0]?.favorites
+}
