@@ -24,8 +24,9 @@ type Props = {thought: ThoughtType}
       </p>
       <span class="mx-1"> • </span>
       <ButtonHeart
-        thoughtId={String(thought.id)}
+        itemId={thought.id}
         favorites={thought.favorites}
+        type="thoughts"
       />
     </div>
   </div>

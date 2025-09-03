@@ -1,8 +1,9 @@
 ---
-const {thoughtId, favorites = 0} = Astro.props
+const {itemId, favorites = 0, type = 'thoughts'} = Astro.props
 type Props = {
-  thoughtId: string
+  itemId: string
   favorites: number
+  type?: 'thoughts' | 'notes'
 }
 ---
 
@@ -12,7 +13,8 @@ type Props = {
     type="button"
     aria-label="like post"
     role="button"
-    data-thought-id={thoughtId}
+    data-item-id={itemId}
+    data-type={type}
     data-like-button
   >
     <svg
@@ -46,7 +48,8 @@ type Props = {
     ) as NodeListOf<HTMLButtonElement>
 
     likeButtons.forEach(button => {
-      const thoughtId = button.getAttribute('data-thought-id')
+      const itemId = button.getAttribute('data-item-id')
+      const itemType = button.getAttribute('data-type')
       const unfilledHeart = button.querySelector(
         '[data-heart-unfilled]',
       ) as SVGPathElement
@@ -57,9 +60,9 @@ type Props = {
         '[data-favorites-count]',
       ) as HTMLSpanElement
 
-      if (!thoughtId || !favoritesSpan || !unfilledHeart || !filledHeart) return
+      if (!itemId || !itemType || !favoritesSpan || !unfilledHeart || !filledHeart) return
 
-      const hasLiked = sessionStorage.getItem(`liked-${thoughtId}`)
+      const hasLiked = sessionStorage.getItem(`liked-${itemType}-${itemId}`)
       if (hasLiked) {
         unfilledHeart.style.display = 'none'
         filledHeart.style.display = 'block'
@@ -69,13 +72,13 @@ type Props = {
       button.addEventListener('click', async e => {
         e.preventDefault()
 
-        const isLiked = sessionStorage.getItem(`liked-${thoughtId}`)
+        const isLiked = sessionStorage.getItem(`liked-${itemType}-${itemId}`)
         button.disabled = true
 
         try {
           const endpoint = isLiked ? 'unlike' : 'like'
           const response = await fetch(
-            `/api/thoughts/${thoughtId}/${endpoint}`,
+            `/api/${itemType}/${itemId}/${endpoint}`,
             {
               method: 'POST',
               headers: {
@@ -91,12 +94,12 @@ type Props = {
             if (isLiked) {
               unfilledHeart.style.display = 'block'
               filledHeart.style.display = 'none'
-              sessionStorage.removeItem(`liked-${thoughtId}`)
+              sessionStorage.removeItem(`liked-${itemType}-${itemId}`)
               button.setAttribute('aria-label', 'like post')
             } else {
               unfilledHeart.style.display = 'none'
               filledHeart.style.display = 'block'
-              sessionStorage.setItem(`liked-${thoughtId}`, 'true')
+              sessionStorage.setItem(`liked-${itemType}-${itemId}`, 'true')
               button.setAttribute('aria-label', 'unlike post')
             }
 

@@ -1,5 +1,6 @@
 ---
 import {getNoteBySlug} from '../../db/models/notes'
+import type {NoteType} from '../../types/note.types'
 import MarkdownRenderer from '../../components/markdown-renderer'
 import BaseLayout from '../../layouts/base.astro'
 import {getDate} from '../../utils/get-date'
@@ -11,6 +12,8 @@ const note = await getNoteBySlug(slug)
 if (!note) {
   throw new Error(`note ${slug} not found`)
 }
+
+type Props = {note: NoteType}
 ---
 
 <BaseLayout>
@@ -26,7 +29,7 @@ if (!note) {
     <MarkdownRenderer content={note.content} />
 
     <div class="mt-10 flex items-center justify-between">
-      <ButtonHeart thoughtId={String(note.id)} favorites={note.favorites} />
+      <ButtonHeart itemId={note.id} favorites={note.favorites} type="notes" />
     </div>
   </div>
 </BaseLayout>
