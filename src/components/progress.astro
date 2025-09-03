@@ -1,0 +1,27 @@
+<div class="fixed top-0 left-0 z-50 h-1 w-full dark:h-0.5" aria-hidden="true">
+  <div
+    id="reading-progress"
+    class="dark:bg-primary-light bg-primary-dark h-full transition-all duration-150 ease-out"
+    style="width: 0%;"
+  >
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const progressBar = document.getElementById('reading-progress')
+    if (!progressBar) return
+
+    const updateProgress = () => {
+      const scrollTop = window.scrollY
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+      progressBar.style.width = `${Math.min(progress, 100)}%`
+    }
+
+    window.addEventListener('scroll', updateProgress, {passive: true})
+    window.addEventListener('resize', updateProgress, {passive: true})
+    updateProgress()
+  })
+</script>
