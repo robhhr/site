@@ -83,6 +83,10 @@
   }
 
   .prose {
-    @apply gap-2.5;
+    @apply gap-5;
+
+    li {
+      @apply list-disc list-inside;
+    }
   }
 }

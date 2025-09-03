@@ -1,15 +1,15 @@
 ---
-const {items, title} = Astro.props
+const {items, title, type} = Astro.props
 import type {ListItemType} from '../types/list.types.ts'
 import ListItem from '../components/list-item.astro'
 ---
 
 <div>
-  {title && <h2 class="mb-5">{title}</h2>}
-  <ul>
+  {title && <h2 class="section-title">{title}</h2>}
+  <ul class="flex flex-col gap-2">
     {
       items.map((item: ListItemType) => (
-        <ListItem title={item.title} to={`/${item.slug ?? ''}`} />
+        <ListItem title={item.title} to={`/${type}/${item.slug ?? ''}`} />
       ))
     }
   </ul>
