@@ -1,19 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import './fonts.css';
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary-light: #d5c4a1;
+  --color-primary-light: #ede5d6;
   --color-primary-dark: #161616;
 
   --color-red-light: #fb4934;
   --color-red-dark: #cc241d;
 
+  --color-orange-light: #fe8019;
+  --color-orange-dark: #d65d0e;
+
   --color-link-light: #458588;
   --color-link-dark: #83a598;
 
-  --font-primary: 'IBM Plex Sans Thai Looped', sans-serif;
+  --font-primary: 'AS Lax', 'Helvetica Neue', Arial, sans-serif;
+  --font-secondary: 'Sanchez', Georgia, 'Times New Roman', serif;
 
   --shadow-primary:
     rgba(213, 196, 161, 0.05) 0px 1px 0px, rgba(213, 196, 161, 0.1) 0px 0px 8px;
@@ -25,6 +29,15 @@
   html {
     @apply dark:bg-primary-dark dark:text-primary-light bg-primary-light text-primary-dark font-primary h-full transition-colors duration-100 ease-in-out;
     font-weight: 500;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-secondary font-semibold;
   }
 
   h1 {
@@ -57,6 +70,16 @@
 
   a:hover:after {
     transform: scaleX(1);
+  }
+
+  .section-title {
+    @apply relative pl-14 mb-6;
+
+    &:before {
+      @apply absolute top-1/2 left-1 h-0.5 w-10 -translate-y-1/2;
+      background-color: currentColor;
+      content: '';
+    }
   }
 
   .prose {

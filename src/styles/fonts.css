@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'AS Lax';
+  src: url('/fonts/AS_lax_regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AS Lax';
+  src: url('/fonts/AS_lax_bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sanchez';
+  src: url('/fonts/sanchez-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Core Humanist Sans';
+  src: url('/fonts/CoreHumanistSans-Regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
