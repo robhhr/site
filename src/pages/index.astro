@@ -10,7 +10,7 @@ import ThoughtList from '../components/thought/thought-list.astro'
 const [noteData, projectData, thoughtData] = await Promise.all([
   tryCatch(getNotes({limit: 3})),
   tryCatch(getProjects({limit: 3})),
-  tryCatch(getThoughts({limit: 3})),
+  tryCatch(getThoughts({limit: 1})),
 ])
 
 const entries = {
@@ -27,7 +27,7 @@ for (const [key, value] of Object.entries(entries)) {
 ---
 
 <BaseLayout>
-  <div class="mb-20 p-4">
+  <div>
     <div class="mb-12 flex flex-col">
       <h1>robhhr</h1>
       <p class="mt-4 mb-2">
@@ -39,7 +39,7 @@ for (const [key, value] of Object.entries(entries)) {
     <div class="flex flex-col gap-12">
       {
         projectData.data?.length > 0 && (
-          <List items={projectData.data} title="projects" />
+          <List items={projectData.data} title="projects" type="project" />
         )
       }
 
@@ -49,7 +49,11 @@ for (const [key, value] of Object.entries(entries)) {
         )
       }
 
-      {noteData.data?.length > 0 && <List items={noteData.data} title="log" />}
+      {
+        noteData.data?.length > 0 && (
+          <List items={noteData.data} title="notes" type="note" />
+        )
+      }
     </div>
   </div>
 </BaseLayout>
