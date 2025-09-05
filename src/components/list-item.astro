@@ -3,7 +3,7 @@ const {title, to} = Astro.props
 ---
 
 <li>
-  <a href={to}>
+  <a class="link" href={to} data-astro-prefetch="hover">
     {title}
   </a>
 </li>
