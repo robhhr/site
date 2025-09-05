@@ -60,7 +60,7 @@
     mask-size: contain;
   }
 
-  a:after {
+  a.link:after {
     @apply border-link-light dark:border-link-dark border-1;
     display: block;
     content: '';
@@ -68,12 +68,12 @@
     transition: transform 100ms ease-in-out;
   }
 
-  a:hover:after {
+  a.link:hover:after {
     transform: scaleX(1);
   }
 
   .section-title {
-    @apply relative pl-14 mb-6;
+    @apply relative mb-6 pl-14;
 
     &:before {
       @apply absolute top-1/2 left-1 h-0.5 w-10 -translate-y-1/2;
@@ -86,7 +86,7 @@
     @apply gap-5;
 
     li {
-      @apply list-disc list-inside;
+      @apply list-inside list-disc;
     }
   }
 }
