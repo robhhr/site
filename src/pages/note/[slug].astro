@@ -2,6 +2,7 @@
 import {getNoteBySlug} from '../../db/models/notes'
 import {getDate} from '../../utils/get-date'
 import BaseLayout from '../../layouts/base.astro'
+import Button from '../../components/button.astro'
 import ButtonHeart from '../../components/button-heart.astro'
 import MarkdownRenderer from '../../components/markdown-renderer'
 import ProgressBar from '../../components/progress.astro'
@@ -20,7 +21,13 @@ type Props = {note: NoteType}
 
 <BaseLayout>
   <ProgressBar />
-  <h1>{note.title}</h1>
+  <div class="flex items-center">
+    <div class="-ml-14">
+      <Button title="home" url="/" />
+    </div>
+    <h1 class="ml-5">{note.title}</h1>
+  </div>
+
   <div class="mt-2 mb-10 flex flex-col gap-2">
     <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
       {getDate(note.created_at)}
