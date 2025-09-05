@@ -1,0 +1,13 @@
+---
+import Bar from '../components/bar.astro'
+import BaseLayout from './base.astro'
+
+const {title, url} = Astro.props
+---
+
+<BaseLayout>
+  <div class="mb-32">
+    <Bar title={title} url={url} />
+    <slot />
+  </div>
+</BaseLayout>
