@@ -1,0 +1,35 @@
+---
+const {title, url} = Astro.props
+---
+
+<div class="flex flex-col items-center">
+  <a
+    class="group relative inline-block cursor-pointer p-1.5 font-medium"
+    href={url}
+    aria-label={`go to ${title}`}
+  >
+    <span
+      aria-hidden="true"
+      class="dark:border-primary-light dark:bg-primary-light dark:group-hover:bg-primary-dark border-primary-dark bg-primary-dark group-hover:bg-primary-light absolute inset-0 h-full w-full translate-x-1 translate-y-1 transform border-2 border-dotted transition duration-200 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1"
+    ></span>
+    <span
+      aria-hidden="true"
+      class="dark:bg-primary-dark dark:group-hover:bg-primary-light dark:border-primary-light bg-primary-light group-hover:bg-primary-dark border-primary-dark absolute inset-0 h-full w-full border-2 border-dotted"
+    ></span>
+    <span
+      aria-hidden="true"
+      class="dark:text-primary-light dark:group-hover:text-primary-dark text-primary-dark group-hover:text-primary-light relative"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        viewBox="0 0 256 256"
+        ><path
+          d="M208,72H128V32a8,8,0,0,0-13.66-5.66l-96,96a8,8,0,0,0,0,11.32l96,96A8,8,0,0,0,128,224V184h80a16,16,0,0,0,16-16V88A16,16,0,0,0,208,72Zm0,96H120a8,8,0,0,0-8,8v28.69L35.31,128,112,51.31V80a8,8,0,0,0,8,8h88Z"
+        ></path></svg
+      >
+    </span>
+  </a>
+</div>
