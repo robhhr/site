@@ -1,16 +1,53 @@
 ---
-import BaseLayout from '../../layouts/base.astro'
+import SingleLayout from '../../layouts/single.astro'
 import {getProjectBySlug} from '../../db/models/projects'
+import MarkdownRenderer from '../../components/markdown-renderer'
+import type {MetadataType, ProjectType} from '../../types/project.types'
 
 const slug = Astro.params.slug
 const project = await getProjectBySlug(slug)
-console.log(project)
 
 if (!project) {
-   throw new Error(`Note ${slug} not found`)
+  throw new Error(`Note ${slug} not found`)
 }
+
+type Props = {project: ProjectType}
 ---
 
-<BaseLayout>
-  <h1>{project.title}</h1>
-</BaseLayout>
+<SingleLayout item={project}>
+  {
+    Array.isArray(project.metadata) && project.metadata.length > 0 && (
+      <div class="mb-6">
+        <ul class="flex flex-col gap-3 pb-6">
+          {project.metadata.map((meta: MetadataType) => {
+            const hasAdditionalValues =
+              Array.isArray(meta.additionalValues) &&
+              meta.additionalValues.length > 0
+
+            return (
+              <li>
+                <strong>{meta.label}:</strong>{' '}
+                {meta.value && (
+                  <span>
+                    {[
+                      meta.value.trim(),
+                      ...(hasAdditionalValues
+                        ? meta.additionalValues.map((val: string) => val.trim())
+                        : []),
+                    ].join(', ')}
+                  </span>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+        <span
+          class="block w-full border-2 border-b border-dotted"
+          aria-hidden="true"
+        />
+      </div>
+    )
+  }
+
+  <MarkdownRenderer content={project.content} />
+</SingleLayout>
