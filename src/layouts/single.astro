@@ -1,0 +1,31 @@
+---
+import {getDate} from '../utils/get-date'
+import BaseLayout from '../layouts/base.astro'
+import Button from '../components/button.astro'
+import MarkdownRenderer from '../components/markdown-renderer'
+import ProgressBar from '../components/progress.astro'
+import TagList from '../components/tag-list.astro'
+
+const {item} = Astro.props
+---
+
+<BaseLayout>
+  <ProgressBar />
+  <div class="relative flex flex-col justify-start lg:flex-row lg:items-center">
+    <div class="mb-4 w-fit lg:mb-0 lg:-ml-14">
+      <Button title="home" url="/" />
+    </div>
+    <h1 class="lg:ml-5">{item.title}</h1>
+  </div>
+
+  <div class="mt-2 mb-10 flex flex-col gap-2">
+    <p class="dark:text-primary-light/50 text-primary-dark/50 text-xs">
+      {getDate(item.created_at)}
+    </p>
+    <TagList tags={item.tags} />
+  </div>
+
+  <div class="mb-32 flex flex-col">
+    <slot />
+  </div>
+</BaseLayout>
