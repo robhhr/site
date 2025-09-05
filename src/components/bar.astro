@@ -1,0 +1,16 @@
+---
+import Button from './button.astro'
+const {title, url} = Astro.props
+---
+
+<div class="mb-10">
+  {
+    title && (
+      <div class="relative flex items-center">
+        <Button title="home" url={url} />
+
+        <h1 class="ml-4">{title}</h1>
+      </div>
+    )
+  }
+</div>
