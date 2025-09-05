@@ -13,6 +13,9 @@
   --color-orange-light: #fe8019;
   --color-orange-dark: #d65d0e;
 
+  --color-yellow-light: #d79921;
+  --color-yellow-dark: #fabd2f;
+
   --color-link-light: #458588;
   --color-link-dark: #83a598;
 
@@ -88,5 +91,26 @@
     li {
       @apply list-inside list-disc;
     }
+
+    pre {
+      @apply dark:bg-primary-light/5 dark:text-primary-light dark:border-yellow-light text-primary-dark border-yellow-dark bg-primary-dark/5 overflow-x-auto rounded border-1 p-3 text-sm;
+      /* box-shadow: rgba(22, 22, 22, 0.1) 0px 2px 8px; */
+
+      code {
+        @apply border-0 bg-transparent p-0;
+      }
+    }
+
+    code {
+      @apply dark:bg-primary-light/5 dark:text-primary-light dark:border-yellow-light text-primary-dark border-yellow-dark bg-primary-dark/5 font-secondary border-1 px-1 text-sm;
+    }
   }
+
+  /* .dark .prose pre { */
+  /*   box-shadow: rgba(237, 229, 214, 0.25) 0px 2px 8px !important; */
+  /**/
+  /*   code { */
+  /*     @apply border-0 bg-transparent p-0; */
+  /*   } */
+  /* } */
 }
