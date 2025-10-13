@@ -1,0 +1,35 @@
+---
+import PageLayout from '../layouts/page.astro'
+import {getDate} from '../utils/get-date'
+import MarkdownRenderer from '../components/markdown-renderer'
+
+const today = new Date('October 12, 2025')
+
+const content = `
+##### updated: ${getDate(today.toISOString())}
+
+<br />
+
+## Analytics
+
+This site uses a self-hosted <a class="link" href="https://github.com/umami-software/umami" target="_blank" rel="noopener noreferrer">umami</a> instance for basic analytics. Page views are tracked to understand site traffic and pageviews are cached with session storage. No personal information is collected, no tracking cookies are used, and your data never leaves my server. Umami respects Do Not Track headers.
+
+<br />
+
+## Interactions
+
+Likes on posts are stored temporarily in your browser's session storage. They disappear when you close it. A counter increments in my database to show total likes, but nothing connects that count to you - no IP addresses, no user IDs, nothing.
+
+<br />
+
+## Questions
+
+If you have concerns or questions, please <a class="link" href="https://github.com/robhhr/site/issues/new" target="_blank" rel="noopener noreferrer">open an issue</a> or contact me.
+`
+---
+
+<PageLayout title="privacy policy" url="/">
+  <div class="-mt-6">
+    <MarkdownRenderer content={content} />
+  </div>
+</PageLayout>
