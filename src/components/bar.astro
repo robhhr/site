@@ -7,11 +7,11 @@ const {title, url} = Astro.props
   {
     title && (
       <div class="relative flex flex-col justify-start lg:flex-row lg:items-center">
-        <div class="mb-4 w-fit lg:mb-0 lg:-ml-14">
+        <div class="mb-4 w-fit lg:mb-0 lg:-ml-20">
           <Button title="home" url={url} />
         </div>
 
-        <h1 class="lg:ml-5">{title}</h1>
+        <h1 class="lg:ml-11">{title}</h1>
       </div>
     )
   }
