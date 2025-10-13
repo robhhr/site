@@ -27,10 +27,13 @@ import ButtonTheme from '../components/button-theme.astro'
     <script
       is:inline
       src="https://umami.robhhr.com/script.js"
-      data-website-id="85598c75-55b3-475b-ab20-dd1eb20e8ab0"></script>
+      data-website-id="85598c75-55b3-475b-ab20-dd1eb20e8ab0"
+      data-do-not-track="true"
+      data-cache="true"
+    ></script>
 
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>robhhr</title>
@@ -42,22 +45,27 @@ import ButtonTheme from '../components/button-theme.astro'
 
   <footer class="relative mt-auto py-4 text-sm">
     <ButtonTheme />
-    <a
-      class="link"
-      href="https://github.com/robhhr"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      github
-    </a>
-    •
-    <a
-      class="link"
-      href="https://github.com/robhhr/site"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      source
-    </a>
+
+    <div class="flex gap-2">
+      <a
+        class="link"
+        href="https://github.com/robhhr"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        github
+      </a>
+      •
+      <a
+        class="link"
+        href="https://github.com/robhhr/site"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        source
+      </a>
+      •
+      <a class="link" href="/privacy"> privacy policy </a>
+    </div>
   </footer>
 </html>
