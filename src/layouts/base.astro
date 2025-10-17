@@ -24,19 +24,21 @@ import ButtonTheme from '../components/button-theme.astro'
         }
       })()
     </script>
-    <script
-      is:inline
-      src="https://umami.robhhr.com/script.js"
-      data-website-id="85598c75-55b3-475b-ab20-dd1eb20e8ab0"
-      data-do-not-track="true"
-      data-cache="true"
-    ></script>
+    {import.meta.env.PROD && (
+      <script
+        is:inline
+        src="https://umami.robhhr.com/script.js"
+        data-website-id="85598c75-55b3-475b-ab20-dd1eb20e8ab0"
+        data-do-not-track="true"
+        data-cache="true"
+      ></script>
+    )}
 
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>robhhr</title>
+    <title>roberto</title>
   </head>
 
   <body class="mx-auto mb-20 flex min-h-full max-w-3xl flex-col px-6 py-12">
