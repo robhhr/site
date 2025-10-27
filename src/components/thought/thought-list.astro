@@ -9,7 +9,7 @@ import type {ThoughtType} from '../../types/thought.types'
     title && (
       <div class="flex items-baseline">
         <h2 class="section-title">{title}</h2>
-        <span class="ml-2 text-xs">
+        <span class="ml-2 text-xs flex">
           (
           <a class="link" href="/thoughts">
             read all
@@ -20,6 +20,12 @@ import type {ThoughtType} from '../../types/thought.types'
     )
   }
   <ul class="flex flex-col">
-    {items.map((item: ThoughtType) => <Thought thought={item} />)}
+    {
+      items.map((item: ThoughtType) => (
+        <li>
+          <Thought thought={item} />
+        </li>
+      ))
+    }
   </ul>
 </div>
