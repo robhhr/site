@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "start": "astro preview"
+    "start": "astro preview",
+    "railway:start": "ln -sf /home/unicorn/fonts /app/dist/client/fonts && npm run start"
   },
   "dependencies": {
     "@astrojs/node": "^9.4.3",
