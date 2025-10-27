@@ -16,7 +16,7 @@
   --color-yellow-light: #d79921;
   --color-yellow-dark: #fabd2f;
 
-  --color-link-light: #458588;
+  --color-link-light: #7c2d12;
   --color-link-dark: #83a598;
 
   --font-primary: 'AS Lax', 'Helvetica Neue', Arial, sans-serif;
@@ -52,7 +52,7 @@
   }
 
   a {
-    @apply text-link-light dark:text-link-dark relative inline-block;
+    @apply hover:underline text-link-light dark:text-link-dark relative inline-block underline-offset-4;
   }
 
   a[target='_blank']::before {
@@ -61,18 +61,6 @@
     background-color: currentColor;
     mask: url('/icon-external-link.svg') no-repeat center;
     mask-size: contain;
-  }
-
-  a.link:after {
-    @apply border-link-light dark:border-link-dark border-1;
-    display: block;
-    content: '';
-    transform: scaleX(0);
-    transition: transform 100ms ease-in-out;
-  }
-
-  a.link:hover:after {
-    transform: scaleX(1);
   }
 
   .section-title {
@@ -103,6 +91,10 @@
 
     code {
       @apply dark:bg-primary-light/5 dark:text-primary-light dark:border-yellow-light text-primary-dark border-yellow-dark bg-primary-dark/5 font-secondary border-1 px-1 text-sm;
+    }
+
+    a[target='_blank']::before {
+      @apply mr-0 -ml-1;
     }
   }
 
