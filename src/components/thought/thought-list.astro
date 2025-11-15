@@ -1,5 +1,5 @@
 ---
-const {items, title} = Astro.props
+const {items, title, isFullPage = false} = Astro.props
 import Thought from './thought.astro'
 import type {ThoughtType} from '../../types/thought.types'
 ---
@@ -9,7 +9,7 @@ import type {ThoughtType} from '../../types/thought.types'
     title && (
       <div class="flex items-baseline">
         <h2 class="section-title">{title}</h2>
-        <span class="ml-2 text-xs flex">
+        <span class="ml-2 flex text-xs">
           (
           <a class="link" href="/thoughts">
             read all
@@ -19,10 +19,17 @@ import type {ThoughtType} from '../../types/thought.types'
       </div>
     )
   }
-  <ul class="flex flex-col">
+
+  <ul class=`${isFullPage ? '-mt-10' : ''} flex flex-col`>
     {
       items.map((item: ThoughtType) => (
-        <li>
+        <li
+          class={
+            isFullPage
+              ? 'border-link-light dark:border-link-dark border-b-2 border-dotted py-12 last:border-b-0'
+              : null
+          }
+        >
           <Thought thought={item} />
         </li>
       ))
