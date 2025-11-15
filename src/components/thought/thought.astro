@@ -19,9 +19,11 @@ type Props = {thought: ThoughtType}
     <TagList tags={thought.tags} />
 
     <div class="ml-auto flex items-center">
-      <p class="dark:text-primary-light/65 text-primary-dark/65 text-xs">
-        {getDate(thought.created_at)}
-      </p>
+      <time
+        datetime={thought.created_at}
+        class="dark:text-primary-light/65 text-primary-dark/65 text-xs"
+        >{getDate(thought.created_at)}</time
+      >
       <span class="mx-1"> • </span>
       <ButtonHeart
         itemId={thought.id}
