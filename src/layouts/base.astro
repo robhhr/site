@@ -6,9 +6,27 @@ import ButtonTheme from '../components/button-theme.astro'
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="preload" href="/fonts/AS_lax_regular-webfont.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/AS_lax_bold-webfont.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/sanchez-regular-webfont.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/AS_lax_regular-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/AS_lax_bold-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/sanchez-regular-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <script is:inline>
       ;(() => {
         try {
@@ -48,7 +66,10 @@ import ButtonTheme from '../components/button-theme.astro'
   </head>
 
   <body class="mx-auto mb-20 flex min-h-full max-w-3xl flex-col px-6 py-12">
-    <header class="sr-only">personal site</header>
+    <header class="sr-only">
+      personal site
+      <a rel="me" href="https://mastodon.social/@robhhr">Mastodon</a>
+    </header>
     <main>
       <slot />
     </main>
