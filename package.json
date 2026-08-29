@@ -12,23 +12,23 @@
     "deploy": "railway up"
   },
   "dependencies": {
-    "@astrojs/node": "^11.0.2",
-    "@astrojs/react": "^6.0.1",
-    "@tailwindcss/vite": "^4.3.2",
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
+    "@astrojs/node": "^11.1.4",
+    "@astrojs/react": "^6.0.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
     "astro": "^7.0.6",
     "dotenv": "^17.4.2",
-    "pg": "^8.22.0",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "pg": "^8.23.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
-    "tailwindcss": "^4.3.2"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.6",
     "prettier-plugin-astro": "0.14.1"
   }
 }
