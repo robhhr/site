@@ -1,16 +1,15 @@
 FROM node:lts-slim as runtime
 WORKDIR /app
 
-COPY package.json .
-RUN rm -rf node_modules package-lock.json
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# Perform a fresh installation of npm dependencies.
-RUN npm install
+# Enable the pnpm version pinned in package.json and install locked dependencies.
+RUN corepack enable && pnpm install --frozen-lockfile
 
 # Copy the rest of your application files.
 COPY . .
 
-RUN npm run build
+RUN pnpm build
 
 # Set environment variables and expose the appropriate port.
 ENV HOST=0.0.0.0
