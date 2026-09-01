@@ -1,23 +1,27 @@
 ---
 import {tryCatch} from '../utils/try-catch'
 import {getNotes} from '../db/models/notes'
+import {getLatestPhotos} from '../db/models/photos'
 import {getProjects} from '../db/models/projects'
 import {getThoughts} from '../db/models/thoughts'
 import BaseLayout from '../layouts/base.astro'
 import List from '../components/list.astro'
 import ThoughtList from '../components/thought/thought-list.astro'
+import PhotoList from '../components/photo/photo-list.astro'
 import Icon from '../assets/logo_new.svg'
 
-const [noteData, projectData, thoughtData] = await Promise.all([
+const [noteData, projectData, thoughtData, photoData] = await Promise.all([
   tryCatch(getNotes({limit: 3})),
   tryCatch(getProjects({limit: 3})),
   tryCatch(getThoughts({limit: 1})),
+  tryCatch(getLatestPhotos({limit: 8})),
 ])
 
 const entries = {
   notes: noteData,
   project: projectData,
   thought: thoughtData,
+  photos: photoData,
 }
 
 for (const [key, value] of Object.entries(entries)) {
@@ -30,7 +34,7 @@ for (const [key, value] of Object.entries(entries)) {
 <BaseLayout>
   <div class="mb-32">
     <div class="mb-12 flex flex-col">
-      <Icon class="h-7 w-auto self-start mb-3" aria-hidden="true" />
+      <Icon class="mb-3 h-7 w-auto self-start" aria-hidden="true" />
       <h1>roberto</h1>
       <p class="mt-4 mb-2">
         web developer. i build things with privacy and performance in mind
@@ -54,6 +58,12 @@ for (const [key, value] of Object.entries(entries)) {
       {
         noteData.data?.length > 0 && (
           <List items={noteData.data} title="notes" type="note" />
+        )
+      }
+
+      {
+        photoData.data?.length > 0 && (
+          <PhotoList items={photoData.data} title="photos" />
         )
       }
     </div>

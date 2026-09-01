@@ -1,0 +1,27 @@
+---
+import {tryCatch} from '../utils/try-catch'
+import {getPublishedPhotos} from '../db/models/photos'
+import type {PhotoType} from '../types/photo.types'
+import PageLayout from '../layouts/page.astro'
+import PhotoEntry from '../components/photo/photo-entry.astro'
+
+const photos = await tryCatch(getPublishedPhotos())
+
+if (photos.error) {
+  console.error('Error fetching photos:', photos.error)
+}
+
+const items: PhotoType[] = photos.data || []
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=300')
+---
+
+<PageLayout title="photos" url="/">
+  <ul class="flex flex-col gap-12">
+    {
+      items.map((photo, index) => (
+        <PhotoEntry photo={photo} eager={index === 0} />
+      ))
+    }
+  </ul>
+</PageLayout>
