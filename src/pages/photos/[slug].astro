@@ -1,0 +1,35 @@
+---
+import {getCollectionBySlug} from '../../db/models/photos'
+import type {PhotoType} from '../../types/photo.types'
+import PageLayout from '../../layouts/page.astro'
+import PhotoEntry from '../../components/photo/photo-entry.astro'
+
+const slug = Astro.params.slug
+const collection = await getCollectionBySlug(slug)
+
+if (!collection) {
+  throw new Error(`photo collection ${slug} not found`)
+}
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=300')
+---
+
+<PageLayout title={collection.title} url="/photos">
+  {
+    (collection.location || collection.description) && (
+      <p class="mb-8 text-sm opacity-60">
+        {collection.location}
+        {collection.location && collection.description ? ' — ' : ''}
+        {collection.description}
+      </p>
+    )
+  }
+
+  <ul class="flex flex-col gap-12">
+    {
+      collection.photos.map((photo: PhotoType, index: number) => (
+        <PhotoEntry photo={photo} eager={index === 0} />
+      ))
+    }
+  </ul>
+</PageLayout>
