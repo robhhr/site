@@ -1,0 +1,51 @@
+---
+import type {PhotoImageType} from '../../types/photo.types'
+import {photoFallbackWidth, photoSrcset, photoUrl} from '../../utils/photo-src'
+
+type Props = {
+  photo: PhotoImageType
+  sizes?: string
+  eager?: boolean
+  // largest css width the image can render at, used to trim the srcset
+  maxWidth?: number
+  aspect?: string
+}
+
+// the layout column is max-w-3xl (48rem), so images never render wider
+const {
+  photo,
+  sizes = '(min-width: 816px) 720px, 100vw',
+  eager = false,
+  maxWidth,
+  aspect,
+} = Astro.props
+
+const fallbackWidth = photoFallbackWidth(photo, maxWidth)
+const ratio = aspect ?? `${photo.width} / ${photo.height}`
+---
+
+<figure
+  class="bg-cover bg-center"
+  style={`aspect-ratio: ${ratio};${
+    photo.placeholder ? ` background-image: url(${photo.placeholder});` : ''
+  }`}
+>
+  <picture>
+    <source
+      type="image/avif"
+      srcset={photoSrcset(photo, 'avif', maxWidth)}
+      sizes={sizes}
+    />
+    <img
+      src={photoUrl(photo, fallbackWidth, 'jpg')}
+      srcset={photoSrcset(photo, 'jpg', maxWidth)}
+      sizes={sizes}
+      width={photo.width}
+      height={photo.height}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      alt=""
+      class="h-full w-full object-cover"
+    />
+  </picture>
+</figure>

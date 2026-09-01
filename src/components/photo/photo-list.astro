@@ -1,0 +1,55 @@
+---
+import type {LatestPhotoType} from '../../types/photo.types'
+import Photo from './photo.astro'
+
+type Props = {
+  items: LatestPhotoType[]
+  title?: string
+}
+
+const {items, title} = Astro.props
+
+// 2 tiles on mobile, 4 from sm up. the column caps at 720px, so a tile is at
+// most (720 - 3 * 8) / 4 = 174px and the 640 derivative covers it past 3x
+const tileWidth = 174
+const sizes = `(min-width: 640px) ${tileWidth}px, 45vw`
+---
+
+<div>
+  {
+    title && (
+      <div class="flex items-baseline">
+        <h2 class="section-title">{title}</h2>
+        <span class="ml-2 flex text-xs">
+          (
+          <a class="link" href="/photos" aria-label="see all photos">
+            see all
+          </a>
+          )
+        </span>
+      </div>
+    )
+  }
+
+  <ul class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    {
+      items.map(photo => (
+        <li>
+          <a
+            class="block transition-opacity hover:opacity-75"
+            href={`/photos#${photo.id}`}
+            data-astro-prefetch="hover"
+            aria-label={photo.caption ?? photo.collection_title}
+          >
+            <Photo
+              photo={photo}
+              sizes={sizes}
+              maxWidth={tileWidth}
+              aspect="1 / 1"
+            />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

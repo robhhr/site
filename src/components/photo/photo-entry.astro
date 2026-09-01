@@ -1,0 +1,40 @@
+---
+import type {PhotoType} from '../../types/photo.types'
+import Photo from './photo.astro'
+import ButtonHeart from '../button-heart.astro'
+
+type Props = {
+  photo: PhotoType
+  eager?: boolean
+}
+
+const {photo, eager = false} = Astro.props
+
+function exifCaption(photo: PhotoType) {
+  const parts = [
+    photo.camera_model,
+    photo.focal_length_mm ? `${parseFloat(photo.focal_length_mm)}mm` : null,
+    photo.aperture ? `ƒ/${parseFloat(photo.aperture)}` : null,
+    photo.shutter_speed ? `${photo.shutter_speed}s` : null,
+    photo.iso ? `iso ${photo.iso}` : null,
+  ]
+  return parts.filter(Boolean).join(' · ')
+}
+
+const exif = exifCaption(photo)
+---
+
+<li id={photo.id} class="scroll-mt-6">
+  <Photo photo={photo} eager={eager} />
+  <div class="mt-1.5">
+    <div class="flex items-center justify-between gap-2">
+      {photo.caption && <p class="text-sm">{photo.caption}</p>}
+      <ButtonHeart
+        itemId={photo.id}
+        favorites={photo.favorites}
+        type="photos"
+      />
+    </div>
+    {exif && <p class="mt-1 text-xs opacity-60">{exif}</p>}
+  </div>
+</li>
