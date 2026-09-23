@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css'
-import ButtonTheme from '../components/button-theme.astro'
 ---
 
 <html lang="en">
@@ -27,25 +26,6 @@ import ButtonTheme from '../components/button-theme.astro'
       type="font/woff2"
       crossorigin
     />
-    <script is:inline>
-      ;(() => {
-        try {
-          const theme = localStorage.getItem('theme')
-          const prefersDark = window.matchMedia(
-            '(prefers-color-scheme: dark)',
-          ).matches
-          const shouldUseDark = theme === 'dark' || (!theme && prefersDark)
-          if (shouldUseDark) {
-            document.documentElement.classList.add('dark')
-          }
-        } catch (e) {
-          // use system pref
-          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark')
-          }
-        }
-      })()
-    </script>
     {
       import.meta.env.PROD && (
         <script
@@ -60,6 +40,7 @@ import ButtonTheme from '../components/button-theme.astro'
 
     <link rel="icon" type="image/png" href="/favicon_alt.png" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="color-scheme" content="dark" />
     <meta name="description" content="roberto | web developer, vancouver" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
@@ -77,8 +58,6 @@ import ButtonTheme from '../components/button-theme.astro'
   </body>
 
   <footer class="relative mt-auto py-4 text-sm">
-    <ButtonTheme />
-
     <div class="flex flex-wrap gap-2">
       <a
         class="link"

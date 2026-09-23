@@ -11,7 +11,7 @@ type Props = {thought: ThoughtType}
 ---
 
 <article
-  class="dark:border-primary-light/25 border-primary-dark/25 relative flex max-w-none flex-col border-b-[0.5px] py-8 first-of-type:pt-0 last-of-type:border-b-0 last-of-type:pb-0"
+  class="border-primary-light/25 relative flex max-w-none flex-col border-b-[0.5px] py-8 first-of-type:pt-0 last-of-type:border-b-0 last-of-type:pb-0"
 >
   {thought.is_pinned && <Pinned />}
   <MarkdownRenderer content={thought.content} />
@@ -21,7 +21,7 @@ type Props = {thought: ThoughtType}
     <div class="ml-auto flex items-center">
       <time
         datetime={thought.created_at}
-        class="dark:text-primary-light/65 text-primary-dark/65 text-xs"
+        class="text-primary-light/65 text-xs"
         >{getDate(thought.created_at)}</time
       >
       <span class="mx-1"> • </span>
