@@ -28,13 +28,12 @@ const exif = exifCaption(photo)
   <Photo photo={photo} eager={eager} />
   <div class="mt-1.5">
     <div class="flex items-center justify-between gap-2">
-      {photo.caption && <p class="text-sm">{photo.caption}</p>}
+      {exif && <p class="mt-1 text-xs opacity-60">{exif}</p>}
       <ButtonHeart
         itemId={photo.id}
         favorites={photo.favorites}
         type="photos"
       />
     </div>
-    {exif && <p class="mt-1 text-xs opacity-60">{exif}</p>}
   </div>
 </li>
